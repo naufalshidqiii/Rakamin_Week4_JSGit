@@ -1,4 +1,4 @@
-//Inisialisasi Array kosong dengan index 100
+//Inisialisasi Array element kosong dengan index 100
 const randomNumArray = new Array(100);
 
 //Deklarasi Array index ganjil dan index genap
@@ -7,7 +7,7 @@ const oddIndexArray = [];
 
 //Isi tiap index array dengan nomor random dengan range 0-50
 for (let i = 0; i < randomNumArray.length; i++) {
-  randomNumArray[i] = getRandomInteger(0, 50);
+  randomNumArray[i] = GetRandomInteger(1, 50);
 }
 
 //Lakukan looping mengisi array evenIndexArray dan oddIndexArray
@@ -30,41 +30,46 @@ for (let i = 0, j = 0, k = 0; i < randomNumArray.length; i++) {
   }
 }
 
-function printStatsArray(arrayName, arrayNameCompare) {
+function PrintStatsArray(arrayName, arrayNameCompare) {
   console.log("Array elements = " + arrayName);
   console.log(
-    "The smallest element in this array is " + getMinArray(arrayName)
+    "The smallest element in this array is " + GetMinArray(arrayName)
   );
-  console.log("The largest element in this array is " + getMaxArray(arrayName));
+  console.log("The largest element in this array is " + GetMaxArray(arrayName));
   console.log(
-    "The total sum of all element in this array is " + getTotArray(arrayName)
+    "The total sum of all element in this array is " + GetTotArray(arrayName)
   );
   console.log(
     "The average value of all element in this array is " +
-      getAvgArray(arrayName)
+      GetAvgArray(arrayName)
   );
-  console.log(compareMinArray(arrayName, arrayNameCompare));
-  console.log(compareMaxArray(arrayName, arrayNameCompare));
-  console.log(compareAvgArray(arrayName, arrayNameCompare));
+  console.log(CompareMinArray(arrayName, arrayNameCompare));
+  console.log(CompareMaxArray(arrayName, arrayNameCompare));
+  console.log(CompareAvgArray(arrayName, arrayNameCompare));
   console.log(
     "This Array has " +
-      sameElementIndex(arrayName, arrayNameCompare) +
+      FindSameElementIndex(arrayName, arrayNameCompare) +
       " same element in the same index compared with the other Array"
   );
+  // console.log(
+  //   "This Array has " +
+  //     FindSameElementInBoth(arrayName, arrayNameCompare) +
+  //     " same element present in both Arrays"
+  // );
   console.log("\n");
 }
 
 //Cetak hasil-hasil fungsi pada array
-printStatsArray(evenIndexArray, oddIndexArray);
-printStatsArray(oddIndexArray, evenIndexArray);
+PrintStatsArray(evenIndexArray, oddIndexArray);
+PrintStatsArray(oddIndexArray, evenIndexArray);
 
 //Fungsi untuk mendapatkan bilangan bulat random
-function getRandomInteger(min, max) {
+function GetRandomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 //Fungsi mencari nilai minimal dalam array
-function getMinArray(arrayName) {
+function GetMinArray(arrayName) {
   let minValue = Infinity;
   index = arrayName.length;
   while (index) {
@@ -75,7 +80,7 @@ function getMinArray(arrayName) {
 }
 
 //Fungsi mencari nilai maksimal
-function getMaxArray(arrayName) {
+function GetMaxArray(arrayName) {
   let maxValue = -Infinity;
   index = arrayName.length;
   while (index) {
@@ -86,7 +91,7 @@ function getMaxArray(arrayName) {
 }
 
 //Fungsi mencari nilai total
-function getTotArray(arrayName) {
+function GetTotArray(arrayName) {
   let totalValue = 0;
   for (i = 0; i < arrayName.length; i++) {
     totalValue += arrayName[i];
@@ -95,47 +100,64 @@ function getTotArray(arrayName) {
 }
 
 //Fungsi mencari nilai rata-rata
-function getAvgArray(arrayName) {
+function GetAvgArray(arrayName) {
   let sumValue = arrayName.length;
-  let totalValue = getTotArray(arrayName);
+  let totalValue = GetTotArray(arrayName);
   return totalValue / sumValue;
 }
 
 //Fungsi membandingkan nilai minimum dua Array
-function compareMinArray(arrayName1, arrayName2) {
-  let minArray1Value = getMinArray(arrayName1);
-  let minArray2Value = getMinArray(arrayName2);
+function CompareMinArray(arrayName1, arrayName2) {
+  let minArray1Value = GetMinArray(arrayName1);
+  let minArray2Value = GetMinArray(arrayName2);
   if (minArray1Value < minArray2Value)
     return "True, this Array have minimum value with the compared Array";
+  else if (minArray1Value == minArray2Value)
+    return "Both Array have the same minimum value";
   else
     return "False, this Array don't have minimum value with the compared Array";
 }
 
 //Fungsi membandingkan nilai maximum dua Array
-function compareMaxArray(arrayName1, arrayName2) {
-  let minArray1Value = getMaxArray(arrayName1);
-  let minArray2Value = getMaxArray(arrayName2);
-  if (minArray1Value > minArray2Value)
+function CompareMaxArray(arrayName1, arrayName2) {
+  let maxArray1Value = GetMaxArray(arrayName1);
+  let maxArray2Value = GetMaxArray(arrayName2);
+  if (maxArray1Value > maxArray2Value)
     return "True, this Array have maximum value with the compared Array";
+  else if (maxArray1Value == maxArray2Value)
+    return "Both Array have the same maximum value";
   else
     return "False, this Array don't have maximum value with the compared Array";
 }
 
 //Fungsi membandingkan nilai rata-rata dua Array
-function compareAvgArray(arrayName1, arrayName2) {
-  let minArray1Value = getAvgArray(arrayName1);
-  let minArray2Value = getAvgArray(arrayName2);
-  if (minArray1Value > minArray2Value)
+function CompareAvgArray(arrayName1, arrayName2) {
+  let avgArray1Value = GetAvgArray(arrayName1);
+  let avgArray2Value = GetAvgArray(arrayName2);
+  if (avgArray1Value > avgArray2Value)
     return "True, this Array have higher average value with the compared Array";
+  else if (avgArray1Value == avgArray2Value)
+    return "Both Array have the same maximum value";
   else
     return "False, this Array don't have higher average value with the compared Array";
 }
 
 //Fungsi membandingkan dua nilai pada posisi yang sama pada tiap masing masing Array
-function sameElementIndex(arrayName1, arrayName2) {
+function FindSameElementIndex(arrayName1, arrayName2) {
   let same = 0;
   for (let i = 0; i < arrayName1.length; i++) {
     if (arrayName1[i] == arrayName2[i]) same++;
   }
   return same;
 }
+
+//Fungsi membandingkan berapa nilai yang sama dalam kedua Array
+// function FindSameElementInBoth(arrayName1, arrayName2) {
+//   let same = 0;
+//   for (let i = 0; i < arrayName1.length; i++) {
+//     for (let j = i; j < arrayName2.length; j++) {
+//       if (arrayName1[i] == arrayName2[j]) same++;
+//     }
+//   }
+//   return same;
+// }
